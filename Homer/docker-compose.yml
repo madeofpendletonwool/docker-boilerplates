@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  homer:
+    image: b4bz/homer:latest
+    container_name: homer
+    ports:
+      - "8089:8080"
+    volumes:
+      - /home/collinp/Homer/:/www/assets
+    restart: unless-stopped

@@ -1,0 +1,30 @@
+---
+version: "2.1"
+services:
+  projectsend:
+    image: linuxserver/projectsend
+    container_name: projectsend
+    environment:
+      - PUID=998
+      - PGID=100
+      - TZ=America/Chicago
+      - MAX_UPLOAD=5000
+    volumes:
+      - ~/ProjectSend/config:/config #Config Volume Goes Here
+      - ~/ProjectSend/data:/data #File Storage Volume Goes Here
+      - /etc/timezone:/etc/timezone:ro #This is for TimeZone
+    ports:
+      - 8085:80
+    restart: unless-stopped
+  db:
+    image: mariadb
+    container_name: mariadb-projectsend
+    environment:
+      MYSQL_ROOT_PASSWORD: projectsend
+      MYSQL_DATABASE: projectsend
+      MYSQL_USER: projectsend
+      MYSQL_PASSWORD: projectsend
+    volumes:
+      - ~/projectsend/mariadb:/var/lib/mysql #Database Volume Goes Here
+      - /etc/timezone:/etc/timezone:ro #This is for TimeZone
+    restart: unless-stopped

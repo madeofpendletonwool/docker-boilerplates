@@ -1,0 +1,2 @@
+ 
+The matrix proxy host in nginx proxy manager needs these advanced settings:

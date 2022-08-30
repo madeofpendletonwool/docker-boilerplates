@@ -1,0 +1,42 @@
+version: '3.3'
+ 
+networks:
+  net:
+    driver: bridge
+ 
+services:
+  authelia:
+    image: authelia/authelia
+#    image: authelia/authelia:4.21.0
+    container_name: authelia
+    volumes:
+      - ./authelia:/config
+ 
+    networks:
+      - net
+ 
+      
+#using EXPOSE: - 9091 as in default docker-compose didn't work for me so i used PORTS
+ 
+    ports:
+      - 9091:9091  
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+ 
+  redis:
+    image: redis:alpine
+    container_name: redis
+    volumes:
+      - ./redis:/data
+    networks:
+      - net
+    expose:
+      - 6379
+    restart: unless-stopped
+    environment:
+      - TZ=America/Chicago
+      - PUID=1000
+      - PGID=1000

@@ -1,0 +1,2 @@
+ 
+exec into container and run a hostname -I to get hostname of the mysql database which it will ask for

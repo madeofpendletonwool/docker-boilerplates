@@ -1,0 +1,11 @@
+web:
+  image: madeofpendletonwool/nginx-custom:v1
+  volumes:
+   - ~/nginx/templates:/etc/nginx/templates
+   - ~/nginx/config:/etc/nginx/
+   - ~/nginx/webs:/usr/share/nginx/html
+  ports:
+   - "8080:80"
+  environment:
+   - NGINX_HOST=website.com
+   - NGINX_PORT=80

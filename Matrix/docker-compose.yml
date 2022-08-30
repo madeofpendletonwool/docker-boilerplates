@@ -1,0 +1,28 @@
+version: '3'
+services:
+  coturn:
+    build:
+      context: ./build/coturn
+      network: host
+    image: myy/coturn:latest
+    restart: always
+    volumes:
+      - "~/conf/turnserver.conf:/etc/turnserver.conf:ro"
+      - "~/data:/srv/coturn"
+      # You could use "docker secrets" instead
+      # Be sure to edit ./coturn/conf/turnserver.conf afterwards if
+      # you use "docker secrets" or change these paths
+    network_mode: host
+  matrix:
+    image: matrixdotorg/synapse:latest
+    ports:
+      - "8008:8008"
+    volumes:
+      - /home/collinp/Matrix/_data:/data
+    environment:
+      - SYNAPSE_VOIP_TURN_MAIN_URL=stun:turn.website.com:5349
+      - SYNAPSE_VOIP_TURN_USERNAME=${turn_username}
+      - SYNAPSE_VOIP_TURN_PASSWORD=${turn_password}
+    depends_on:
+      - coturn     # For the VOIP
+    restart: always

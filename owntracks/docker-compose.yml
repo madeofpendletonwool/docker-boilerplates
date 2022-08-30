@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  otrecorder:
+    image: owntracks/recorder
+    command: -port 0  # Seems to be needed to disable MQTT
+    ports:
+      - 8083:8083
+    volumes:
+     - ~/Documents/GitHub/HomeLab/docker/ContainerSetup/owntracks/config:/config
+      - ~/Documents/GitHub/HomeLab/docker/ContainerSetup/owntracks:/store
+    restart: unless-stopped
+
+volumes:
+  store:
+  config:

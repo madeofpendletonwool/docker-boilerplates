@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  app:
+    image: hascheksolutions/pictshare
+    environment:
+      - TITLE= Gooseberry Pics
+      - URL=pics.website.com
+    volumes:
+      - ~/pictshare/uploads:/usr/share/nginx/html/data
+    ports:
+      - "8190:80"
+    networks:
+      backside:
+    restart: always
+
+# Define networks to allow best isolation
+networks:
+  # Internal network for communication with PostgreSQL/MySQL
+  backside:
+
+# Define named volumes so data stays in place
+volumes:
+  uploads:

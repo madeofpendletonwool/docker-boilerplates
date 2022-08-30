@@ -1,0 +1,41 @@
+ 
+version: '3.1'
+
+services:
+
+  ghost:
+    image: ghost:4-alpine
+    restart: always
+    ports:
+      - 8067:2368
+    volumes:
+      - ~/ghost/content:/var/lib/ghost/content
+    environment:
+      # see https://ghost.org/docs/config/#configuration-options
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: YourPassword
+      database__connection__database: ghost
+      mail__transport: SMTP
+      mail__from: "'Name' noreply@website.com"
+      mail__options__service: Mailgun
+      mail__options__host: smtp.mailgun.org
+      mail__options__auth__user: UserMail
+      mail__options__auth__pass: passhere
+      # this url value is just an example, and is likely wrong for your environment!
+      url: https://blog.{Website}.com
+      # contrary to the default mentioned in the linked documentation, this image defaults to NODE_ENV=production (so development mode needs to be explicitly specified if desired)
+      #NODE_ENV: development
+
+
+  db:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - ~/ghost/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: YourPassword
+
+volumes:
+  data:

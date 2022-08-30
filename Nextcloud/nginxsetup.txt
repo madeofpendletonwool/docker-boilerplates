@@ -1,0 +1,13 @@
+ 
+Custom locations needed
+
+location: /.well-known/caldav
+scheme: http - 1.1.1.1/nextcloud/remote.php/dav/ - port (ex. 4080)
+
+location:location: /.well-known/cardav
+scheme: http - 1.1.1.1/nextcloud/remote.php/dav/ - port (ex. 4080)
+
+turn on cache assets, websockets support, block common exploits
+
+Under ssl tab set
+force ssl, http/2, hsts

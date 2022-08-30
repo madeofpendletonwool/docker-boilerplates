@@ -1,0 +1,16 @@
+---
+version: '3.1'
+
+services:
+
+  terrariaserver:
+    image: ryshe/terraria:latest
+    container_name: terraria
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    environment:
+      - WORLD_FILENAME=world_name.wld
+    ports:
+      - "7777:7777"
+    volumes:
+      - ~/terraria/worlds:/root/.local/share/Terraria/Worlds

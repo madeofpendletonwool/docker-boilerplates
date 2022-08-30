@@ -1,0 +1,16 @@
+---
+version: '2'
+
+services:
+  http-server:
+    image: ghcr.io/patrickdappollonio/docker-http-server
+    ports:
+      - 5000:5000
+    environment:
+      - FILE_SERVER_TITLE=HTTP Files
+      - FILE_SERVER_COLOR_SET=blue-green
+      - FILE_SERVER_USERNAME=user
+      - FILE_SERVER_PASSWORD=yoursecurepw
+    volumes:
+      - ~/nginx/webs/assessments:/html
+    restart: always

@@ -1,0 +1,12 @@
+ 
+version: "3"
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    user: 1000:1000 # should be owner of volumes
+    ports:
+      - "4533:4533"
+    restart: unless-stopped
+    volumes:
+      - "~/Navidrome:/data"
+      - "~/Navidrome/music:/music:ro"
