@@ -1,0 +1,17 @@
+ 
+
+version: "3.7"
+
+services:
+    runner:
+      image: ghcr.io/myoung34/docker-github-actions-runner:latest
+      restart: always
+      environment:
+        RUNNER_NAME: "my-runner"
+        REPO_URL: https://github.com/myrepo
+        RUNNER_SCOPE: repo
+        #RUNNER_ORGANIZATION_URL: ${RUNNER_ORGANIZATION_URL}
+        ACCESS_TOKEN: my-PAT
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - ~/githubrunner/repo:/_work

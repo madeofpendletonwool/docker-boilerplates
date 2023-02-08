@@ -26,10 +26,6 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8087']
 
-  - job_name: 'Omada'
-    static_configs:
-      - targets: ['omada_exporter:9202']
-
         # Node Exporter Proxmox
   - job_name: 'prox_exporter'
     static_configs:

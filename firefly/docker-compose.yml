@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+  app:
+    image: fireflyiii/core:latest
+    restart: always
+    volumes:
+      - ~/firefly/data:/var/www/html/storage/upload
+    env_file: .env
+    ports:
+      - 5562:8080
+    depends_on:
+      - db
+  db:
+    image: mariadb
+    hostname: fireflyiiidb
+    restart: always
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=firefly
+      - MYSQL_PASSWORD=my-secret
+      - MYSQL_DATABASE=firefly
+    volumes:
+      - ~/firefly/db:/var/lib/mysql
+
+  fidi:
+    image: fireflyiii/data-importer:latest
+    restart: always
+    env_file: .fidi.env
+    ports:
+      - 5563:8080
+    environment:
+      - FIREFLY_III_ACCESS_TOKEN='my-generated-access-token'
+      - FIREFLY_III_URL=https://cash.mysite.com
+    depends_on:
+      - app
+
+volumes:
+   firefly_iii_upload:
+   firefly_iii_db:
+

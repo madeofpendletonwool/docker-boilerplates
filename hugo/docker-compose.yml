@@ -1,0 +1,11 @@
+ 
+version: "3"
+services:
+  server:
+    restart: always
+    image: klakegg/hugo:latest
+    command: server
+    volumes:
+      - "~/hugo/data:/src"
+    ports:
+      - "1313:1313"

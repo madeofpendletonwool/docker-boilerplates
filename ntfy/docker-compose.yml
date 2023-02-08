@@ -1,0 +1,18 @@
+ 
+version: '2.1'
+
+services:
+
+  ntfy:
+    container_name: ntfy
+    image: binwiederhier/ntfy
+    ports:
+      - "8091:80"
+    command:
+      - serve
+    volumes:
+      - ~/ntfy/messages:/var/cache/ntfy
+      - ~/ntfy/config:/etc/ntfy
+    environment:
+      - cache-file=~/ntfy/messages
+    restart: unless-stopped

@@ -1,0 +1,13 @@
+ 
+version: "3"
+services:
+  server:
+    restart: always
+    image: juanluisbaptiste/postfix
+    environment:
+      - SMTP_SERVER=smtp.myserver.com
+      - SMTP_USERNAME=myuser
+      - SMTP_PASSWORD=mypw
+      - SERVER_HOSTNAME=server-hostname
+    ports:
+      - "25:25"
